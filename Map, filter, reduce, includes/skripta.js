@@ -1,5 +1,21 @@
 // Pulling data from json array
 
+// Fetch only country names
+const countryNames = countries.map(element => element.name.common);
+console.log('CountryName', countryNames);
+
+// Fetch names of European countries
+const europeanCountries = countries.filter(element => element.continents.includes('Europe')).map(element => element.name.common);
+console.log("European Countries", europeanCountries);
+
+// Fetch area of European countries
+const euCountriesArea = countries.filter(element => element.continents.includes('Europe')).map(element => element.area).reduce((acc, res) => acc = acc + res);
+console.log("European Countries Total Area :", euCountriesArea + ' km²');
+
+// Find a country whose capital is Pyongyang; if found print the country name; else assign null
+const pyongyangCountry = (countries.find(element => element.capital.includes('Pyongyang')) !== undefined) ? countries.filter(element => element.capital.includes('Pyongyang')).map(element => element.name.common) : null;
+console.log("Pyongyang Country :", pyongyangCountry);
+
 const countries = [{
             "name": {
                 "common": "Ethiopia",
@@ -2414,19 +2430,3 @@ const countries = [{
             }
         }
     ]
-
-// Fetch only country names
-const countryNames = countries.map(element => element.name.common);
-console.log('CountryName', countryNames);
-
-// Fetch names of European countries
-const europeanCountries = countries.filter(element => element.continents.includes('Europe')).map(element => element.name.common);
-console.log("European Countries", europeanCountries);
-
-// Fetch area of European countries
-const euCountriesArea = countries.filter(element => element.continents.includes('Europe')).map(element => element.area).reduce((acc, res) => acc = acc + res);
-console.log("European Countries Total Area :", euCountriesArea + ' km²');
-
-// Find a country whose capital is Pyongyang; if found print the country name; else assign null
-const pyongyangCountry = (countries.find(element => element.capital.includes('Pyongyang')) !== undefined) ? countries.filter(element => element.capital.includes('Pyongyang')).map(element => element.name.common) : null;
-console.log("Pyongyang Country :", pyongyangCountry);
