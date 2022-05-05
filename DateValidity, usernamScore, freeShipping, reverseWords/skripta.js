@@ -36,6 +36,7 @@ const date = dateInput,
             date = new Date(YYYY, MM - 1, DD)
         return date.toLocaleDateString('hr-HR', { weekday: 'long' });
     }
+
 isValidDate(dateInput) ? console.log(date + ' je ' + capitalizeFirstLetter(getWeekDay(date))) : alert('Unos nije valjani datum, ispravan format : MM/DD/YYYY');
 
 /* 2) Napravite funkciju koja prima ime kao string i provjerava koliko je dobro dano ime. 
@@ -54,21 +55,21 @@ function nameScore(scores, name) {
     let sum = 0;
     for (const c of name.toUpperCase()) {
         if (Object.keys(scores).includes(c)) {
-            sum = sum + scores[c];
+            sum += scores[c];
         }
     }
     switch (true) {
         case (sum <= 60):
-            console.log("NOT TOO GOOD");
+            console.log("NOT TOO GOOD", sum);
             break;
         case (61 <= sum && sum <= 300):
-            console.log("PRETTY GOOD");
+            console.log("PRETTY GOOD", sum);
             break;
         case (301 <= sum && sum <= 599):
-            console.log("VERY GOOD");
+            console.log("VERY GOOD", sum);
             break;
         case (600 <= sum):
-            console.log("THE BEST");
+            console.log("THE BEST", sum);
             break;
         default:
             console.log("BAD NAME");
@@ -80,47 +81,32 @@ nameScore(scores, nameInput);
 /*3) Napravite funkciju koja određuje ispunjava li narudžbu za kupnju besplatnu dostavu. 
 Narudžba je prihvatljiva za besplatnu dostavu ako ukupni trošak kupljenih artikala prelazi 50,00 USD.*/
 
-function freeShipping(order)
-{
+function freeShipping(order) {
     const sum = Object.values(order).reduce((sum, price) => sum + price);
     return (sum > 50);
 }
 const order = {
     'Shampoo': 5.99,
     'Rubber Ducks': 15.99,
-    'TV' : 300
-  };
- 
-  console.log(freeShipping(order));
+    'TV': 300
+};
 
-  /* 4) Napišite funkciju koja preokreće sve riječi u rečenici koje počinju određenim slovom (pripaziti na velika i mala slova). */
-  let sentenceInput = prompt('Enter a sentence to reverse words starting with given letter').trim();
-  let letterInput = prompt('Enter the letter');
-  const reverseStartingWith = (str, char) => {
-    const strArr = str.toLowerCase().split(' ');
-    return strArr.reduce((acc, val) => {
-       if(val[0] !== char.toLowerCase()){
-          acc.push(val);
-          return acc;
-       };
-       acc.push(val.split('').reverse().join(''));
-       return acc;
-    }, []).join(' ');
- };
+console.log(freeShipping(order));
 
- function specialReverse(str, char) {
+/* 4) Napišite funkciju koja preokreće sve riječi u rečenici koje počinju određenim slovom (pripaziti na velika i mala slova). */
+let sentenceInput = prompt('Enter a sentence to reverse words starting with given letter').trim();
+let letterInput = prompt('Enter the letter');
+
+function reverseStartingWith(str, char) {
     var words = [];
     words = str.toLowerCase().match(/\S+/g);
     var result = "";
     for (var i = 0; i < words.length; i++) {
-       if (words[i].startsWith(char.toLowerCase())){
-          result += words[i].split('').reverse().join('') + " ";
-       }
-       else
-       result += words[i].split('').join('') + " ";
-       
+        (words[i].startsWith(char.toLowerCase())) ? result += words[i].split('').reverse().join('') + " "
+            : result += words[i].split('').join('') + " ";
+
     }
     return result
-  }
- console.log(reverseStartingWith(sentenceInput, letterInput));
- console.log(specialReverse(sentenceInput, letterInput));
+}
+
+console.log(reverseStartingWith(sentenceInput, letterInput));
