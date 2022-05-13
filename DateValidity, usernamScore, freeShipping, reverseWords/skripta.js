@@ -102,8 +102,7 @@ function reverseStartingWith(str, char) {
     words = str.toLowerCase().match(/\S+/g);
     var result = "";
     for (var i = 0; i < words.length; i++) {
-        (words[i].startsWith(char.toLowerCase())) ? result += words[i].split('').reverse().join('') + " "
-            : result += words[i].split('').join('') + " ";
+        (words[i].startsWith(char.toLowerCase())) ? result += words[i].split('').reverse().join('') + " " : result += words[i].split('').join('') + " ";
 
     }
     return result
